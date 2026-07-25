@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wonderchord — a beautiful musical instrument for young children</title>
+<meta name="description" content="A real first instrument for ages 2–6. Twelve rainbow strings always in tune, five warm voices, nine classic songs, and lessons that wait for your child. No ads, no subscriptions, no data.">
+<meta property="og:title" content="Wonderchord">
+<meta property="og:description" content="A beautiful musical instrument for young children. The rainbow on this page really plays — try it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream-l:#FEFBEF; --cream:#F8F0DA; --cream-d:#ECE0C5;
+    --rim:#CBBA99; --tray:#EFE5CE;
+    --ink:#514738; --ink-s:#857762; --blue:#2E7ACF;
+    --red:#F24D40; --orange:#FA9426; --yellow:#F7CC26;
+    --green:#4DBF66; --indigo:#408CF2; --purple:#996BE6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);font-size:18px;
+    line-height:1.6;
+    background:
+      radial-gradient(circle at 12% 4%, rgba(255,255,255,.65), transparent 55%),
+      linear-gradient(180deg,var(--cream-l),var(--cream) 45%,var(--cream-d));
+    min-height:100vh;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 20px;}
+  a{color:var(--blue);}
+  a:focus-visible,button:focus-visible{outline:4px solid var(--blue);outline-offset:3px;border-radius:8px;}
+  h1,h2,.logo{font-family:'Baloo 2',cursive;}
+
+  header.top{display:flex;justify-content:space-between;align-items:center;padding:26px 0 6px;gap:14px;}
+  .brandrow{display:flex;align-items:center;gap:12px;}
+  .grille i{display:block;height:3px;background:rgba(203,186,153,.6);border-radius:2px;margin-bottom:3px;}
+  .logo{font-size:30px;font-weight:800;letter-spacing:.5px;text-decoration:none;
+    text-shadow:0 2px 0 #fff, 0 3px 2px rgba(203,186,153,.45);}
+  .badge{font-size:14px;font-weight:800;color:var(--ink-s);background:rgba(255,255,255,.72);
+    padding:8px 14px;border-radius:999px;box-shadow:0 3px 8px rgba(81,71,56,.10);}
+
+  .hero{text-align:center;padding:38px 0 6px;}
+  .hero h1{font-size:clamp(36px,6.4vw,58px);line-height:1.06;font-weight:800;}
+  .hero h1 em{font-style:normal;color:var(--red);}
+  .hero p{max-width:58ch;margin:16px auto 22px;color:var(--ink-s);font-weight:700;font-size:20px;}
+  .cta{display:inline-flex;flex-direction:column;background:var(--ink);color:#fff;text-decoration:none;
+    border-radius:18px;padding:12px 26px;line-height:1.15;box-shadow:0 6px 0 rgba(81,71,56,.35);}
+  .cta small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;}
+  .cta span{font-size:21px;font-weight:800;font-family:'Baloo 2';}
+  .cta:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(81,71,56,.35);}
+  .price{display:block;margin-top:12px;font-weight:800;color:var(--ink-s);font-size:15px;}
+  .price b{color:var(--red);}
+
+  /* the instrument panel */
+  .panel{background:linear-gradient(180deg,var(--cream-l),var(--cream));
+    border-radius:30px;padding:18px;margin:30px 0 8px;
+    box-shadow:0 14px 34px rgba(81,71,56,.22), inset 0 2px 0 rgba(255,255,255,.9);
+    border:3px solid rgba(203,186,153,.45);}
+  .panel-head{display:flex;justify-content:space-between;align-items:center;
+    margin:0 6px 12px;color:var(--ink-s);font-weight:800;font-size:14px;
+    letter-spacing:.06em;text-transform:uppercase;gap:10px;flex-wrap:wrap;}
+  .voices{display:flex;gap:8px;}
+  .voices button{font-size:22px;background:linear-gradient(180deg,#fff,var(--cream));
+    border:1.5px solid rgba(203,186,153,.5);border-radius:14px;padding:6px 12px;cursor:pointer;
+    transition:transform .12s;box-shadow:0 2px 3px rgba(203,186,153,.5);}
+  .voices button.on{border:3px solid var(--red);transform:scale(1.06);background:#fff;}
+  .tray{background:var(--tray);border-radius:22px;padding:10px;
+    box-shadow:inset 0 3px 0 rgba(203,186,153,.7), inset 0 -3px 0 rgba(255,255,255,.85);}
+  .leds{display:flex;padding:0 4px 7px;}
+  .leds i{flex:1;height:9px;border-radius:50%;opacity:.3;max-width:9px;margin:0 auto;}
+  .plate{display:flex;gap:6px;height:210px;touch-action:none;}
+  .bar{flex:1;border:0;border-radius:12px;cursor:pointer;
+    box-shadow:inset 2px 0 0 rgba(255,255,255,.5), 0 0 0 2px rgba(255,255,255,.55),
+      0 3px 6px rgba(0,0,0,.18);
+    transition:filter .3s ease;}
+  .bar.hit{filter:brightness(1.7) saturate(.7);}
+  @media (prefers-reduced-motion: reduce){.bar{transition:none}.voices button{transition:none}}
+  .hint{text-align:center;font-weight:800;color:var(--ink-s);margin:12px 0 0;font-size:16px;}
+
+  .sechead{text-align:center;font-size:clamp(28px,5vw,40px);font-weight:800;margin:62px 0 8px;}
+  .subhead{text-align:center;color:var(--ink-s);font-weight:700;max-width:54ch;margin:0 auto 26px;}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .card{background:rgba(255,255,255,.8);border-radius:24px;padding:22px;text-align:center;
+    box-shadow:0 6px 16px rgba(81,71,56,.12);border:2px solid rgba(255,255,255,.9);}
+  .card .big{font-size:44px;}
+  .card h3{font-family:'Baloo 2';font-size:21px;margin:8px 0 4px;}
+  .card p{font-size:16px;color:var(--ink-s);font-weight:600;}
+
+  .songs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .song{background:rgba(255,255,255,.8);border-radius:20px;padding:14px;
+    box-shadow:0 5px 12px rgba(81,71,56,.10);}
+  .song .e{font-size:28px;}
+  .song b{display:block;font-family:'Baloo 2';font-size:17px;line-height:1.2;margin:4px 0 2px;}
+  .song i{font-style:normal;font-size:13.5px;color:var(--ink-s);font-weight:700;}
+
+  .worlds{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:6px;}
+  .world{background:rgba(255,255,255,.7);border:2px dashed rgba(203,186,153,.9);
+    border-radius:999px;padding:8px 16px;font-weight:800;color:var(--ink-s);font-size:15px;}
+  .world.now{background:var(--ink);color:#fff;border-style:solid;border-color:var(--ink);}
+
+  .promise{background:var(--ink);color:#F6F1E4;border-radius:28px;padding:30px 26px;margin-top:12px;}
+  .promise h2{color:#fff;font-size:clamp(24px,4vw,32px);margin-bottom:8px;}
+  .promise ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 22px;margin:14px 0 12px;}
+  .promise li{font-weight:700;font-size:16.5px;}
+  .promise li::before{content:"\2713  ";color:#8FD79E;font-weight:800;}
+  .promise p{font-size:15px;color:#C9BFAA;}
+
+  .maker{text-align:center;margin:56px 0 0;color:var(--ink-s);font-weight:700;}
+  .maker b{color:var(--ink);}
+
+  footer{margin-top:60px;padding:30px 0 44px;text-align:center;color:var(--ink-s);font-size:15px;font-weight:700;}
+  footer .links{margin-bottom:10px;}
+  footer .links a{margin:0 12px;}
+
+  @media (max-width:700px){
+    .cards{grid-template-columns:1fr;}
+    .songs{grid-template-columns:repeat(2,1fr);}
+    .promise ul{grid-template-columns:1fr;}
+    .plate{height:170px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brandrow">
+      <div class="grille" aria-hidden="true">
+        <i style="width:34px"></i><i style="width:30px"></i><i style="width:26px"></i>
+        <i style="width:22px"></i><i style="width:18px"></i>
+      </div>
+      <a class="logo" href="#" aria-label="Wonderchord">
+        <span style="color:var(--red)">W</span><span style="color:var(--orange)">O</span><span style="color:var(--yellow)">N</span><span style="color:var(--green)">D</span><span style="color:var(--indigo)">E</span><span style="color:var(--purple)">R</span><span style="color:var(--red)">C</span><span style="color:var(--orange)">H</span><span style="color:var(--yellow)">O</span><span style="color:var(--green)">R</span><span style="color:var(--indigo)">D</span>
+      </a>
+    </div>
+    <span class="badge">Ages 2–6 · No ads, ever</span>
+  </header>
+
+  <section class="hero">
+    <h1>A beautiful musical<br>instrument for <em>young children.</em></h1>
+    <p>Twelve rainbow strings that are always in tune. Five warm voices.
+    Nine songs they already know. They cannot play a wrong note —
+    they can only make music.</p>
+    <!-- Replace href with your App Store URL + Apple's official badge before launch -->
+    <a class="cta" href="#" id="store-link"><small>Download on the</small><span>App Store</span></a>
+    <span class="price"><b>$3.99</b> once · no subscriptions · no in-app purchases</span>
+  </section>
+
+  <!-- ======== the playable instrument ======== -->
+  <div class="panel" id="try">
+    <div class="panel-head">
+      <span>Try it — pick a voice, sweep the rainbow</span>
+      <div class="voices" role="group" aria-label="Choose a voice">
+        <button class="on" data-v="omni" aria-label="Omni voice">&#10024;</button>
+        <button data-v="harp" aria-label="Harp voice">&#127925;</button>
+        <button data-v="bell" aria-label="Bell voice">&#128276;</button>
+        <button data-v="organ" aria-label="Organ voice">&#127929;</button>
+      </div>
+    </div>
+    <div class="tray">
+      <div class="leds" id="leds" aria-hidden="true"></div>
+      <div class="plate" id="plate" role="group" aria-label="Playable rainbow strings tuned to C major. Sweep across, or press Enter on a bar."></div>
+    </div>
+  </div>
+  <p class="hint">&#128266; This page really plays — these are the app's own voices.</p>
+
+  <h2 class="sechead">Simple enough for two. Real enough to keep.</h2>
+  <div class="cards">
+    <div class="card"><div class="big">&#9728;&#65039;</div><h3>Press a colour</h3><p>Six pads — sun, heart, star, moon, cloud, rainbow. Every combination sounds good, in any order.</p></div>
+    <div class="card"><div class="big">&#127752;</div><h3>Sweep the rainbow</h3><p>Twelve strings that retune themselves to whatever your child is holding. Wrong notes are impossible.</p></div>
+    <div class="card"><div class="big">&#11088;</div><h3>Learn by playing</h3><p>“Wait for me!” pauses each song until your child plays the glowing pad — then it rolls on. A star for every finish.</p></div>
+  </div>
+
+  <h2 class="sechead">Nine songs that teach</h2>
+  <p class="subhead">The classics children already know, with the real melodies —
+  and the words appearing on screen as they’re sung.</p>
+  <div class="songs">
+    <div class="song"><span class="e">&#11088;</span><b>Twinkle Twinkle</b><i>Melody &amp; listening</i></div>
+    <div class="song"><span class="e">&#128288;</span><b>The ABC Song</b><i>Letters A to Z</i></div>
+    <div class="song"><span class="e">&#128046;</span><b>Old MacDonald</b><i>Animal sounds</i></div>
+    <div class="song"><span class="e">&#128017;</span><b>Mary's Little Lamb</b><i>Gentle melody</i></div>
+    <div class="song"><span class="e">&#128675;</span><b>Row Your Boat</b><i>Rhythm in three</i></div>
+    <div class="song"><span class="e">&#127753;</span><b>London Bridge</b><i>Melody &amp; memory</i></div>
+    <div class="song"><span class="e">&#128290;</span><b>1, 2, Buckle My Shoe</b><i>Counting 1–10</i></div>
+    <div class="song"><span class="e">&#127752;</span><b>The Rainbow Song</b><i>Colours light the strings</i></div>
+    <div class="song"><span class="e">&#128151;</span><b>Kind Words</b><i>Please &amp; thank you</i></div>
+  </div>
+
+  <h2 class="sechead">More worlds to explore</h2>
+  <p class="subhead">Wonderchord ships with its Classic voices. New sound worlds
+  arrive in free updates — all part of the same one-time purchase.</p>
+  <div class="worlds">
+    <span class="world now">&#10024; Classic — included</span>
+    <span class="world">&#128640; Space</span>
+    <span class="world">&#129429; Dinosaurs</span>
+    <span class="world">&#127754; Ocean</span>
+    <span class="world">&#127876; Christmas</span>
+    <span class="world">&#127795; Nature</span>
+  </div>
+
+  <h2 class="sechead">The grown-ups part</h2>
+  <div class="promise">
+    <h2>Our promise, in plain words &#128106;</h2>
+    <ul>
+      <li>No ads — ever</li>
+      <li>No subscriptions, no in-app purchases</li>
+      <li>No data collected, no accounts</li>
+      <li>No links out of the app</li>
+      <li>Works completely offline</li>
+      <li>Parent dashboard behind a hold-to-open gate</li>
+    </ul>
+    <p>Hold the grown-ups button in the app to see the stars your child has
+    earned and what each song teaches. Progress lives only on your device.
+    Designed for Apple’s Kids category and COPPA from day one.</p>
+  </div>
+
+  <p class="maker">From the maker of <b>Pocket Strum</b> — the classic electronic
+  autoharp reborn for iPhone. Wonderchord is the same care, rebuilt for the
+  smallest hands in the house.</p>
+</div>
+
+<footer>
+  <div class="links">
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="mailto:YOUR@EMAIL">Contact</a>
+  </div>
+  © 2026 YOUR NAME · Wonderchord collects no data.
+</footer>
+
+<script>
+/* The playable rainbow: each bar plays a C-major tone in the chosen
+   voice — the same characters as the app. No pitch bending: every note
+   starts in tune. Audio starts only after a user gesture. */
+(function(){
+  var NOTES=[60,64,67,72,76,79,84,88,91,96,100,103];
+  var HUES=[0,25,48,75,110,150,175,205,230,262,290,320];
+  var VOICES={omni :{w:'square',   cut:2200, dec:1.3},
+              harp :{w:'triangle', cut:2600, dec:1.5},
+              bell :{w:'sine',     cut:5200, dec:2.2},
+              organ:{w:'square',   cut:800,  dec:1.1}};
+  var voice='omni', ctx=null, master=null, lastBar=-1;
+
+  var plate=document.getElementById('plate');
+  var leds=document.getElementById('leds');
+  NOTES.forEach(function(m,i){
+    var b=document.createElement('button');
+    b.className='bar'; b.type='button';
+    b.setAttribute('aria-label','String '+(i+1));
+    b.style.background='linear-gradient(180deg,hsl('+HUES[i]+',78%,68%),hsl('+HUES[i]+',88%,52%))';
+    b.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();pluck(i,.7);}
+    });
+    plate.appendChild(b);
+    var l=document.createElement('i');
+    l.style.background='hsl('+HUES[i]+',85%,60%)';
+    leds.appendChild(l);
+  });
+  var bars=Array.prototype.slice.call(plate.children);
+  var lamps=Array.prototype.slice.call(leds.children);
+
+  Array.prototype.slice.call(document.querySelectorAll('.voices button')).forEach(function(btn){
+    btn.addEventListener('click',function(){
+      voice=btn.dataset.v;
+      Array.prototype.slice.call(document.querySelectorAll('.voices button')).forEach(function(x){
+        x.classList.toggle('on', x===btn);
+      });
+      pluck(6,.7);
+    });
+  });
+
+  function audio(){
+    if(ctx){ if(ctx.state==='suspended') ctx.resume(); return; }
+    var AC=window.AudioContext||window.webkitAudioContext;
+    ctx=new AC(); master=ctx.createGain(); master.gain.value=.5;
+    master.connect(ctx.destination);
+  }
+  function pluck(i,vel){
+    audio();
+    var t=ctx.currentTime, g=VOICES[voice];
+    var f=440*Math.pow(2,(NOTES[i]-69)/12);
+    var o=ctx.createOscillator(); o.type=g.w;
+    o.frequency.setValueAtTime(f,t);                      // dead in tune
+    var flt=ctx.createBiquadFilter(); flt.type='lowpass';
+    flt.frequency.setValueAtTime(g.cut,t);
+    flt.frequency.exponentialRampToValueAtTime(Math.max(220,g.cut*0.35),t+g.dec);
+    flt.Q.value=.6;
+    var env=ctx.createGain();
+    env.gain.setValueAtTime(0.0001,t);
+    env.gain.exponentialRampToValueAtTime(.22*vel+.05,t+.01);
+    env.gain.exponentialRampToValueAtTime(.0001,t+g.dec);
+    o.connect(flt); flt.connect(env); env.connect(master);
+    o.start(t); o.stop(t+g.dec+0.1);
+    var b=bars[i], l=lamps[i];
+    b.classList.remove('hit'); void b.offsetWidth; b.classList.add('hit');
+    l.style.opacity='1';
+    setTimeout(function(){ b.classList.remove('hit'); l.style.opacity='0.3'; },330);
+  }
+  function barAt(x){
+    var r=plate.getBoundingClientRect();
+    return Math.max(0,Math.min(11,Math.floor((x-r.left)/r.width*12)));
+  }
+  plate.addEventListener('pointerdown',function(e){
+    plate.setPointerCapture(e.pointerId);
+    lastBar=barAt(e.clientX); pluck(lastBar,.7);
+  });
+  plate.addEventListener('pointermove',function(e){
+    if(lastBar<0) return;
+    var i=barAt(e.clientX);
+    if(i!==lastBar){
+      var dir=i>lastBar?1:-1;
+      for(var j=lastBar+dir; dir>0? j<=i:j>=i; j+=dir) pluck(j,.8);
+      lastBar=i;
+    }
+  });
+  plate.addEventListener('pointerup',function(){lastBar=-1;});
+  plate.addEventListener('pointercancel',function(){lastBar=-1;});
+})();
+</script>
+</body>
+</html>
